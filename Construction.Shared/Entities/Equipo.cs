@@ -22,8 +22,13 @@ namespace Construction.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Especialidad { get; set;}
 
-
+        [Display(Name = "Lista de miembros")]
+        [MaxLength(250, ErrorMessage = "No se permiten más de 250 caracteres")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string ListaMiembros { get; set; }
-        
+
+        //Relaciones
+        public ICollection<ProyectosEquipos> ProyectosEquipos { get; set; }
+
     }
 }

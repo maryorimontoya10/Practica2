@@ -21,14 +21,25 @@ namespace Construction.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Ubicacion { get; set; }
 
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Descripción")]
         [MaxLength(100, ErrorMessage = "No se permiten más de 10s0 caracteres")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Descripcion { get; set; }
 
-        public string FechaInicio { get; set; }
-        public string FechaFin { get; set; }
+        [Display(Name = "Fecha de Inicio")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public DateTime FechaInicio { get; set; }
 
+        [Display(Name = "Fecha de finalización")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public DateTime FechaFin { get; set; }
+
+        //Relaciones
+        public ICollection<Tarea> Tareas { get; set; }
+        public ICollection<ProyectosEquipos> ProyectosEquipos { get; set; }
+        public Presupuesto Presupuestos { get; set; }
 
     }
 }

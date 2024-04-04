@@ -28,6 +28,9 @@ namespace Construction.Shared.Entities
 
         [Display(Name = "Disponibilidad")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public bool Disponibilidad { get; set; }
+        public Boolean Disponibilidad { get; set; }
+
+        //Relaciones
+        public Tarea Tareas { get; set; }
     }
 }

@@ -26,7 +26,17 @@ namespace Construction.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Proveedor { get; set; }
 
-        public string Fecha { get; set; }
+        [Display(Name = "Fecha de entrega")]
+        [DisplayFormat(DataFormatString ="{0:yyyy/MM/dd}",ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public DateTime FechaEntrega { get; set; }
+
+        //Relaciones
+
+        public ICollection<TaskMaterials> TaskMaterials { get; set; }
+
+
+
 
     }
 }
