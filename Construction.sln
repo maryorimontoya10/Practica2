@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Construction.Shared", "Construction.Shared\Construction.Shared.csproj", "{E763127B-BCC9-491E-A775-06F07A9F5060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Construction.Shared", "Construction.Shared\Construction.Shared.csproj", "{E763127B-BCC9-491E-A775-06F07A9F5060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Construction.API", "Construction.API\Construction.API.csproj", "{2733F0C7-0B32-4A2B-A49F-E0F2675A470E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Construction.API", "Construction.API\Construction.API.csproj", "{2733F0C7-0B32-4A2B-A49F-E0F2675A470E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Construction.WEB", "Construction.WEB\Construction.WEB.csproj", "{F7C9ECAD-80A7-4FF0-A154-81E2DCE08710}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Construction.WEB", "Construction.WEB\Construction.WEB.csproj", "{F7C9ECAD-80A7-4FF0-A154-81E2DCE08710}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

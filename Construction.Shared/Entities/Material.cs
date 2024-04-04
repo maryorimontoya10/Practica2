@@ -26,5 +26,7 @@ namespace Construction.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Proveedor { get; set; }
 
+        public string Fecha { get; set; }
+
     }
 }

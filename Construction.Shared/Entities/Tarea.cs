@@ -20,6 +20,8 @@ namespace Construction.Shared.Entities
         [MaxLength(100, ErrorMessage = "No se permiten más de 10s0 caracteres")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Descripcion { get; set; }
+        public string FechaInicio { get; set; }
+        public string FechaFin { get; set; }
 
     }
 }

@@ -21,6 +21,9 @@ namespace Construction.Shared.Entities
         [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Especialidad { get; set;}
+
+
+        public string ListaMiembros { get; set; }
         
     }
 }

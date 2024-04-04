@@ -10,5 +10,7 @@ namespace Construction.Shared.Entities
     {
         public int Id { get; set; }
 
+        public string Categorias { get; set; }
+
     }
 }
