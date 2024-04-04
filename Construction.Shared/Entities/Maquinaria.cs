@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,12 @@ namespace Construction.Shared.Entities
         public Boolean Disponibilidad { get; set; }
 
         //Relaciones
-        public Tarea Tareas { get; set; }
+        public ICollection<Tarea> Tareas { get; set; }
+
+        [ForeignKey("Proyecto")]
+        public int ProyectoId { get; set; }
+        public Proyecto Proyectos { get; set; }
+
+
     }
 }

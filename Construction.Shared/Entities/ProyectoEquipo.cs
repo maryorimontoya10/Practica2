@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Construction.Shared.Entities
 {
-    public class ProyectosEquipos
+    public class ProyectoEquipo
     {
-        public int IdProyecto { get; set; }
-        public int IdEquipo { get; set; }
+        public int Id { get; set; }
 
         //Relaciones
-
         public Proyecto Proyectos { get; set; }
         public Equipo Equipos { get; set; }
     }

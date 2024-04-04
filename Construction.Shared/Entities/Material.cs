@@ -32,8 +32,8 @@ namespace Construction.Shared.Entities
         public DateTime FechaEntrega { get; set; }
 
         //Relaciones
-
-        public ICollection<TaskMaterials> TaskMaterials { get; set; }
+        public ICollection<TareaMaterial> TareasMateriales { get; set; }
+        public Proyecto Proyectos { get; set; }
 
 
 

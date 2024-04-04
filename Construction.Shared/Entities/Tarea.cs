@@ -33,8 +33,8 @@ namespace Construction.Shared.Entities
         public DateTime FechaFin { get; set; }
 
         //Relaciones
-        public ICollection<TareasMateriales> TareasMateriales { get; set; }
-        public ICollection<Maquinaria> Maquinarias { get; set; }
+        public ICollection<TareaMaterial> TareasMateriales { get; set; }
+        public Maquinaria Maquinarias { get; set; }
         public Proyecto Proyectos { get; set; }
 
     }

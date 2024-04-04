@@ -38,7 +38,9 @@ namespace Construction.Shared.Entities
 
         //Relaciones
         public ICollection<Tarea> Tareas { get; set; }
-        public ICollection<ProyectosEquipos> ProyectosEquipos { get; set; }
+        public ICollection<Material> Materiales { get; set; }
+        public ICollection<ProyectoEquipo> ProyectosEquipos { get; set; }
+        public ICollection<Maquinaria> Maquinarias { get; set; }
         public Presupuesto Presupuestos { get; set; }
 
     }

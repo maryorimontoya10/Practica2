@@ -28,7 +28,7 @@ namespace Construction.Shared.Entities
         public string ListaMiembros { get; set; }
 
         //Relaciones
-        public ICollection<ProyectosEquipos> ProyectosEquipos { get; set; }
+        public ICollection<ProyectoEquipo> ProyectosEquipos { get; set; }
 
     }
 }

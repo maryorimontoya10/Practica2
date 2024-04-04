@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,9 @@ namespace Construction.Shared.Entities
         public double PresupuestoMateriales { get; set; }
 
         //Relaciones
+
+        [ForeignKey("Proyecto")]
+        public int ProyectoId { get; set; }
         public Proyecto Proyectos { get; set; }
     }
 }

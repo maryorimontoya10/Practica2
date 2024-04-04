@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace Construction.Shared.Entities
 {
-    public class TareasMateriales
+    public class TareaMaterial
     {
-        public int IdTarea { get; set; }
-        public int IdMaterial { get; set; }
+        public int Id { get; set; }
 
         //Relaciones
-
         public Material Materiales { get; set; }
         public Tarea Tareas { get; set; }
     }
-}
