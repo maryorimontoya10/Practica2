@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Construction.Shared.Entities
@@ -37,6 +38,7 @@ namespace Construction.Shared.Entities
         public DateTime FechaFin { get; set; }
 
         //Relaciones
+        [JsonIgnore]
         public ICollection<Tarea> Tareas { get; set; }
         public ICollection<Material> Materiales { get; set; }
         public ICollection<ProyectoEquipo> ProyectosEquipos { get; set; }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Construction.Shared.Entities
@@ -33,6 +34,7 @@ namespace Construction.Shared.Entities
         public DateTime FechaFin { get; set; }
 
         //Relaciones
+        [JsonIgnore]
         public ICollection<TareaMaterial> TareasMateriales { get; set; }
         public Maquinaria Maquinarias { get; set; }
         public Proyecto Proyectos { get; set; }

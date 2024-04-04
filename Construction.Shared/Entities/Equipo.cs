@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Construction.Shared.Entities
@@ -28,6 +29,7 @@ namespace Construction.Shared.Entities
         public string ListaMiembros { get; set; }
 
         //Relaciones
+        [JsonIgnore]
         public ICollection<ProyectoEquipo> ProyectosEquipos { get; set; }
 
     }

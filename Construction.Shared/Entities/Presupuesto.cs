@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Construction.Shared.Entities
@@ -25,6 +26,7 @@ namespace Construction.Shared.Entities
         public double PresupuestoMateriales { get; set; }
 
         //Relaciones
+        [JsonIgnore]
 
         [ForeignKey("Proyecto")]
         public int ProyectoId { get; set; }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Construction.Shared.Entities
@@ -32,6 +33,7 @@ namespace Construction.Shared.Entities
         public Boolean Disponibilidad { get; set; }
 
         //Relaciones
+        [JsonIgnore]
         public ICollection<Tarea> Tareas { get; set; }
 
         [ForeignKey("Proyecto")]
