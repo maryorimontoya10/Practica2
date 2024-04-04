@@ -13,10 +13,9 @@ namespace Construction.Shared.Entities
 
         //Relaciones
 
-        [JsonIgnore]
+      
         public Proyecto Proyectos { get; set; }
 
-        [JsonIgnore]
         public Equipo Equipos { get; set; }
     }
 }

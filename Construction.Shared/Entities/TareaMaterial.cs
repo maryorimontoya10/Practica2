@@ -13,10 +13,10 @@ namespace Construction.Shared.Entities
 
         //Relaciones
 
-        [JsonIgnore]
+   
         public Material Materiales { get; set; }
 
-        [JsonIgnore]
+
         public Tarea Tareas { get; set; }
     }
 }
