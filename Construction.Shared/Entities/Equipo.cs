@@ -29,7 +29,6 @@ namespace Construction.Shared.Entities
         public string ListaMiembros { get; set; }
 
         //Relaciones
-        [JsonIgnore]
         public ICollection<ProyectoEquipo> ProyectosEquipos { get; set; }
 
     }

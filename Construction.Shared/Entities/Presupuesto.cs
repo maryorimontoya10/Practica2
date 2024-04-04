@@ -26,10 +26,14 @@ namespace Construction.Shared.Entities
         public double PresupuestoMateriales { get; set; }
 
         //Relaciones
-        [JsonIgnore]
+        
 
         [ForeignKey("Proyecto")]
+
+        [JsonIgnore]
         public int ProyectoId { get; set; }
+
+        [JsonIgnore]
         public Proyecto Proyectos { get; set; }
     }
 }

@@ -40,9 +40,17 @@ namespace Construction.Shared.Entities
         //Relaciones
         [JsonIgnore]
         public ICollection<Tarea> Tareas { get; set; }
+
+        [JsonIgnore]
         public ICollection<Material> Materiales { get; set; }
+
+        [JsonIgnore]
         public ICollection<ProyectoEquipo> ProyectosEquipos { get; set; }
+
+        [JsonIgnore]
         public ICollection<Maquinaria> Maquinarias { get; set; }
+
+        [JsonIgnore]
         public Presupuesto Presupuestos { get; set; }
 
     }
