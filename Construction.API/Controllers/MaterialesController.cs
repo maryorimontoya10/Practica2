@@ -5,52 +5,52 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Construction.API.Controllers
 {
+
     [ApiController]
-    [Route("/api/tareas")]
-    public class TareasController : ControllerBase
+    [Route("/api/materiales")]
+    public class MaterialesController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public TareasController(DataContext context)
+        public MaterialesController(DataContext context)
         {
             _context = context;
         }
-
         [HttpGet()]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.Tareas.ToListAsync());
+            return Ok(await _context.Materiales.ToListAsync());
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Tarea tarea)
+        public async Task<ActionResult> Post(Material material)
         {
-            _context.Add(tarea);
+            _context.Add(material);
             await _context.SaveChangesAsync();
-            return Ok(tarea);
+            return Ok(material);
         }
 
         //Método Get- por Id
         [HttpGet("id: int")]
         public async Task<ActionResult> Get(int id)
         {
-            var tarea = await
-            _context.Tareas.SingleOrDefaultAsync(x => x.Id == id);
+            var material = await
+            _context.Materiales.SingleOrDefaultAsync(x => x.Id == id);
 
-            if (tarea == null)
+            if (material == null)
             {
                 return NotFound();
             }
-            return Ok(tarea);
+            return Ok(material);
         }
 
         //Método de actualizar
         [HttpPut]
-        public async Task<ActionResult> Put(Tarea tarea)
+        public async Task<ActionResult> Put(Material material)
         {
-            _context.Update(tarea);
+            _context.Update(material);
             await _context.SaveChangesAsync();
-            return Ok(tarea);
+            return Ok(material);
         }
 
         //Método de borrar
@@ -59,7 +59,7 @@ namespace Construction.API.Controllers
         {
 
 
-            var FilasAfectadas = await _context.Tareas
+            var FilasAfectadas = await _context.Materiales
 
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();

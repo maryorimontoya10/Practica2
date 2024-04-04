@@ -1,4 +1,5 @@
-﻿using Construction.API.Data;
+﻿
+using Construction.API.Data;
 using Construction.Shared.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 namespace Construction.API.Controllers
 {
     [ApiController]
-    [Route("/api/tareas")]
-    public class TareasController : ControllerBase
+    [Route("/api/proyectoequipos")]
+    public class ProyectoEquiposController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public TareasController(DataContext context)
+        public ProyectoEquiposController(DataContext context)
         {
             _context = context;
         }
@@ -19,38 +20,38 @@ namespace Construction.API.Controllers
         [HttpGet()]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.Tareas.ToListAsync());
+            return Ok(await _context.ProyectosEquipos.ToListAsync());
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Tarea tarea)
+        public async Task<ActionResult> Post(ProyectoEquipo proyectoequipo)
         {
-            _context.Add(tarea);
+            _context.Add(proyectoequipo);
             await _context.SaveChangesAsync();
-            return Ok(tarea);
+            return Ok(proyectoequipo);
         }
 
         //Método Get- por Id
         [HttpGet("id: int")]
         public async Task<ActionResult> Get(int id)
         {
-            var tarea = await
-            _context.Tareas.SingleOrDefaultAsync(x => x.Id == id);
+            var proyectoequipo = await
+            _context.ProyectosEquipos.SingleOrDefaultAsync(x => x.Id == id);
 
-            if (tarea == null)
+            if (proyectoequipo == null)
             {
                 return NotFound();
             }
-            return Ok(tarea);
+            return Ok(proyectoequipo);
         }
 
         //Método de actualizar
         [HttpPut]
-        public async Task<ActionResult> Put(Tarea tarea)
+        public async Task<ActionResult> Put(ProyectoEquipo proyectoequipo)
         {
-            _context.Update(tarea);
+            _context.Update(proyectoequipo);
             await _context.SaveChangesAsync();
-            return Ok(tarea);
+            return Ok(proyectoequipo);
         }
 
         //Método de borrar
@@ -59,7 +60,7 @@ namespace Construction.API.Controllers
         {
 
 
-            var FilasAfectadas = await _context.Tareas
+            var FilasAfectadas = await _context.ProyectosEquipos
 
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();
@@ -72,3 +73,4 @@ namespace Construction.API.Controllers
         }
     }
 }
+

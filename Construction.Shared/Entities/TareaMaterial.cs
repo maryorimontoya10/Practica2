@@ -14,3 +14,4 @@ namespace Construction.Shared.Entities
         public Material Materiales { get; set; }
         public Tarea Tareas { get; set; }
     }
+}

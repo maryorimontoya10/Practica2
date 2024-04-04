@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Construction.API.Controllers
 {
+
     [ApiController]
-    [Route("/api/tareas")]
-    public class TareasController : ControllerBase
+    [Route("/api/presupuestos")]
+    public class PresupuestosController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public TareasController(DataContext context)
+        public PresupuestosController(DataContext context)
         {
             _context = context;
         }
@@ -19,38 +20,38 @@ namespace Construction.API.Controllers
         [HttpGet()]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.Tareas.ToListAsync());
+            return Ok(await _context.Presupuestos.ToListAsync());
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Tarea tarea)
+        public async Task<ActionResult> Post(Presupuesto presupuesto)
         {
-            _context.Add(tarea);
+            _context.Add(presupuesto);
             await _context.SaveChangesAsync();
-            return Ok(tarea);
+            return Ok(presupuesto);
         }
 
         //Método Get- por Id
         [HttpGet("id: int")]
         public async Task<ActionResult> Get(int id)
         {
-            var tarea = await
-            _context.Tareas.SingleOrDefaultAsync(x => x.Id == id);
+            var presupuesto = await
+            _context.Presupuestos.SingleOrDefaultAsync(x => x.Id == id);
 
-            if (tarea == null)
+            if (presupuesto == null)
             {
                 return NotFound();
             }
-            return Ok(tarea);
+            return Ok(presupuesto);
         }
 
         //Método de actualizar
         [HttpPut]
-        public async Task<ActionResult> Put(Tarea tarea)
+        public async Task<ActionResult> Put(Presupuesto presupuesto)
         {
-            _context.Update(tarea);
+            _context.Update(presupuesto);
             await _context.SaveChangesAsync();
-            return Ok(tarea);
+            return Ok(presupuesto);
         }
 
         //Método de borrar
@@ -59,7 +60,7 @@ namespace Construction.API.Controllers
         {
 
 
-            var FilasAfectadas = await _context.Tareas
+            var FilasAfectadas = await _context.Presupuestos
 
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();

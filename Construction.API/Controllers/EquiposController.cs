@@ -8,7 +8,7 @@ namespace Construction.API.Controllers
 {
     [ApiController]
     [Route("/api/equipos")]
-    public class EquiposController:ControllerBase
+    public class EquiposController : ControllerBase
     {
         private readonly DataContext _context;
 
@@ -16,7 +16,7 @@ namespace Construction.API.Controllers
         {
             _context = context;
         }
-        
+
         [HttpGet()]
         public async Task<ActionResult> Get()
         {
@@ -35,14 +35,14 @@ namespace Construction.API.Controllers
         [HttpGet("id: int")]
         public async Task<ActionResult> Get(int id)
         {
-            var owner = await
+            var equipo = await
             _context.Equipos.SingleOrDefaultAsync(x => x.Id == id);
 
-            if (owner == null)
+            if (equipo == null)
             {
                 return NotFound();
             }
-            return Ok(owner);
+            return Ok(equipo);
         }
 
         //Método de actualizar
