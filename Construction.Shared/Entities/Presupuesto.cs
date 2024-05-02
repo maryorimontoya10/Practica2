@@ -28,7 +28,7 @@ namespace Construction.Shared.Entities
         //Relaciones
         
 
-        [ForeignKey("Proyecto")]
+        
 
         [JsonIgnore]
         public int ProyectoId { get; set; }

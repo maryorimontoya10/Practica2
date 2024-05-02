@@ -23,7 +23,7 @@ namespace Construction.Shared.Entities
         public string Ubicacion { get; set; }
 
         [Display(Name = "Descripción")]
-        [MaxLength(100, ErrorMessage = "No se permiten más de 10s0 caracteres")]
+        [MaxLength(100, ErrorMessage = "No se permiten más de 100 caracteres")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Descripcion { get; set; }
 
@@ -38,20 +38,12 @@ namespace Construction.Shared.Entities
         public DateTime FechaFin { get; set; }
 
         //Relaciones
-        [JsonIgnore]
-        public ICollection<Tarea> Tareas { get; set; }
 
-        [JsonIgnore]
-        public ICollection<Material> Materiales { get; set; }
 
         [JsonIgnore]
         public ICollection<ProyectoEquipo> ProyectosEquipos { get; set; }
 
-        [JsonIgnore]
-        public ICollection<Maquinaria> Maquinarias { get; set; }
 
-        [JsonIgnore]
-        public Presupuesto Presupuestos { get; set; }
 
     }
 }

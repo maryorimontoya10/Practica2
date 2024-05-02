@@ -116,22 +116,24 @@ namespace Construction.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProyectosId = table.Column<int>(type: "int", nullable: true),
-                    EquiposId = table.Column<int>(type: "int", nullable: true)
+                    ProyectoId = table.Column<int>(type: "int", nullable: false),
+                    EquipoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProyectosEquipos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProyectosEquipos_Equipos_EquiposId",
-                        column: x => x.EquiposId,
+                        name: "FK_ProyectosEquipos_Equipos_EquipoId",
+                        column: x => x.EquipoId,
                         principalTable: "Equipos",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProyectosEquipos_Proyectos_ProyectosId",
-                        column: x => x.ProyectosId,
+                        name: "FK_ProyectosEquipos_Proyectos_ProyectoId",
+                        column: x => x.ProyectoId,
                         principalTable: "Proyectos",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -144,17 +146,19 @@ namespace Construction.API.Migrations
                     Descripcion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     FechaInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FechaFin = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MaquinariasId = table.Column<int>(type: "int", nullable: true),
-                    ProyectosId = table.Column<int>(type: "int", nullable: true)
+                    MaquinariaId = table.Column<int>(type: "int", nullable: false),
+                    ProyectosId = table.Column<int>(type: "int", nullable: true),
+                    ProyectId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tareas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tareas_Maquinarias_MaquinariasId",
-                        column: x => x.MaquinariasId,
+                        name: "FK_Tareas_Maquinarias_MaquinariaId",
+                        column: x => x.MaquinariaId,
                         principalTable: "Maquinarias",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Tareas_Proyectos_ProyectosId",
                         column: x => x.ProyectosId,
@@ -168,22 +172,24 @@ namespace Construction.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MaterialesId = table.Column<int>(type: "int", nullable: true),
-                    TareasId = table.Column<int>(type: "int", nullable: true)
+                    MaterialId = table.Column<int>(type: "int", nullable: false),
+                    TareaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TareasMateriales", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TareasMateriales_Materiales_MaterialesId",
-                        column: x => x.MaterialesId,
+                        name: "FK_TareasMateriales_Materiales_MaterialId",
+                        column: x => x.MaterialId,
                         principalTable: "Materiales",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TareasMateriales_Tareas_TareasId",
-                        column: x => x.TareasId,
+                        name: "FK_TareasMateriales_Tareas_TareaId",
+                        column: x => x.TareaId,
                         principalTable: "Tareas",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -199,23 +205,22 @@ namespace Construction.API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Presupuestos_ProyectoId",
                 table: "Presupuestos",
-                column: "ProyectoId",
-                unique: true);
+                column: "ProyectoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProyectosEquipos_EquiposId",
+                name: "IX_ProyectosEquipos_EquipoId",
                 table: "ProyectosEquipos",
-                column: "EquiposId");
+                column: "EquipoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProyectosEquipos_ProyectosId",
+                name: "IX_ProyectosEquipos_ProyectoId",
                 table: "ProyectosEquipos",
-                column: "ProyectosId");
+                column: "ProyectoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tareas_MaquinariasId",
+                name: "IX_Tareas_MaquinariaId",
                 table: "Tareas",
-                column: "MaquinariasId");
+                column: "MaquinariaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tareas_ProyectosId",
@@ -223,14 +228,14 @@ namespace Construction.API.Migrations
                 column: "ProyectosId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TareasMateriales_MaterialesId",
+                name: "IX_TareasMateriales_MaterialId",
                 table: "TareasMateriales",
-                column: "MaterialesId");
+                column: "MaterialId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TareasMateriales_TareasId",
+                name: "IX_TareasMateriales_TareaId",
                 table: "TareasMateriales",
-                column: "TareasId");
+                column: "TareaId");
         }
 
         /// <inheritdoc />

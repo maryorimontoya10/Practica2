@@ -33,16 +33,12 @@ namespace Construction.Shared.Entities
         public Boolean Disponibilidad { get; set; }
 
         //Relaciones
-        [JsonIgnore]
-        public ICollection<Tarea> Tareas { get; set; }
-
-        [ForeignKey("Proyecto")]
-
-        [JsonIgnore]
-        public int ProyectoId { get; set; }
 
         [JsonIgnore]
         public Proyecto Proyectos { get; set; }
+        public int ProyectoId { get; set; }
+
+        
 
 
     }

@@ -34,14 +34,18 @@ namespace Construction.Shared.Entities
         public DateTime FechaFin { get; set; }
 
         //Relaciones
-       
+
+        [JsonIgnore]
         public ICollection<TareaMaterial> TareasMateriales { get; set; }
 
         [JsonIgnore]
         public Maquinaria Maquinarias { get; set; }
 
+        public int MaquinariaId { get; set; }
+
         [JsonIgnore]
         public Proyecto Proyectos { get; set; }
 
+        public int ProyectId { get; set;}
     }
 }

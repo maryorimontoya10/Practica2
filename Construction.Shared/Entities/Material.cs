@@ -33,6 +33,8 @@ namespace Construction.Shared.Entities
         public DateTime FechaEntrega { get; set; }
 
         //Relaciones
+
+        [JsonIgnore]
         public ICollection<TareaMaterial> TareasMateriales { get; set; }
 
         [JsonIgnore]

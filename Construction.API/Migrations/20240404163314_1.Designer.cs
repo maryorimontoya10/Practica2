@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Construction.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240404132334_1")]
+    [Migration("20240404163314_1")]
     partial class _1
     {
         /// <inheritdoc />
@@ -145,8 +145,7 @@ namespace Construction.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProyectoId")
-                        .IsUnique();
+                    b.HasIndex("ProyectoId");
 
                     b.ToTable("Presupuestos");
                 });
@@ -193,17 +192,17 @@ namespace Construction.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("EquiposId")
+                    b.Property<int>("EquipoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProyectosId")
+                    b.Property<int>("ProyectoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EquiposId");
+                    b.HasIndex("EquipoId");
 
-                    b.HasIndex("ProyectosId");
+                    b.HasIndex("ProyectoId");
 
                     b.ToTable("ProyectosEquipos");
                 });
@@ -227,7 +226,7 @@ namespace Construction.API.Migrations
                     b.Property<DateTime>("FechaInicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MaquinariasId")
+                    b.Property<int>("MaquinariaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -235,12 +234,15 @@ namespace Construction.API.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("ProyectId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ProyectosId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MaquinariasId");
+                    b.HasIndex("MaquinariaId");
 
                     b.HasIndex("ProyectosId");
 
@@ -255,17 +257,17 @@ namespace Construction.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("MaterialesId")
+                    b.Property<int>("MaterialId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TareasId")
+                    b.Property<int>("TareaId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MaterialesId");
+                    b.HasIndex("MaterialId");
 
-                    b.HasIndex("TareasId");
+                    b.HasIndex("TareaId");
 
                     b.ToTable("TareasMateriales");
                 });
@@ -273,7 +275,7 @@ namespace Construction.API.Migrations
             modelBuilder.Entity("Construction.Shared.Entities.Maquinaria", b =>
                 {
                     b.HasOne("Construction.Shared.Entities.Proyecto", "Proyectos")
-                        .WithMany("Maquinarias")
+                        .WithMany()
                         .HasForeignKey("ProyectoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -284,7 +286,7 @@ namespace Construction.API.Migrations
             modelBuilder.Entity("Construction.Shared.Entities.Material", b =>
                 {
                     b.HasOne("Construction.Shared.Entities.Proyecto", "Proyectos")
-                        .WithMany("Materiales")
+                        .WithMany()
                         .HasForeignKey("ProyectosId");
 
                     b.Navigation("Proyectos");
@@ -293,8 +295,8 @@ namespace Construction.API.Migrations
             modelBuilder.Entity("Construction.Shared.Entities.Presupuesto", b =>
                 {
                     b.HasOne("Construction.Shared.Entities.Proyecto", "Proyectos")
-                        .WithOne("Presupuestos")
-                        .HasForeignKey("Construction.Shared.Entities.Presupuesto", "ProyectoId")
+                        .WithMany()
+                        .HasForeignKey("ProyectoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -305,11 +307,15 @@ namespace Construction.API.Migrations
                 {
                     b.HasOne("Construction.Shared.Entities.Equipo", "Equipos")
                         .WithMany("ProyectosEquipos")
-                        .HasForeignKey("EquiposId");
+                        .HasForeignKey("EquipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Construction.Shared.Entities.Proyecto", "Proyectos")
                         .WithMany("ProyectosEquipos")
-                        .HasForeignKey("ProyectosId");
+                        .HasForeignKey("ProyectoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Equipos");
 
@@ -319,11 +325,13 @@ namespace Construction.API.Migrations
             modelBuilder.Entity("Construction.Shared.Entities.Tarea", b =>
                 {
                     b.HasOne("Construction.Shared.Entities.Maquinaria", "Maquinarias")
-                        .WithMany("Tareas")
-                        .HasForeignKey("MaquinariasId");
+                        .WithMany()
+                        .HasForeignKey("MaquinariaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Construction.Shared.Entities.Proyecto", "Proyectos")
-                        .WithMany("Tareas")
+                        .WithMany()
                         .HasForeignKey("ProyectosId");
 
                     b.Navigation("Maquinarias");
@@ -335,11 +343,15 @@ namespace Construction.API.Migrations
                 {
                     b.HasOne("Construction.Shared.Entities.Material", "Materiales")
                         .WithMany("TareasMateriales")
-                        .HasForeignKey("MaterialesId");
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Construction.Shared.Entities.Tarea", "Tareas")
                         .WithMany("TareasMateriales")
-                        .HasForeignKey("TareasId");
+                        .HasForeignKey("TareaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Materiales");
 
@@ -351,11 +363,6 @@ namespace Construction.API.Migrations
                     b.Navigation("ProyectosEquipos");
                 });
 
-            modelBuilder.Entity("Construction.Shared.Entities.Maquinaria", b =>
-                {
-                    b.Navigation("Tareas");
-                });
-
             modelBuilder.Entity("Construction.Shared.Entities.Material", b =>
                 {
                     b.Navigation("TareasMateriales");
@@ -363,15 +370,7 @@ namespace Construction.API.Migrations
 
             modelBuilder.Entity("Construction.Shared.Entities.Proyecto", b =>
                 {
-                    b.Navigation("Maquinarias");
-
-                    b.Navigation("Materiales");
-
-                    b.Navigation("Presupuestos");
-
                     b.Navigation("ProyectosEquipos");
-
-                    b.Navigation("Tareas");
                 });
 
             modelBuilder.Entity("Construction.Shared.Entities.Tarea", b =>
