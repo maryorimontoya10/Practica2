@@ -1,0 +1,29 @@
+﻿@page "/proyectos/create"
+@inject IRepository repository
+@inject NavigationManager navegationManager
+@inject SweetAlertService sweetAlertService
+
+<h3>ProyectoCreate</h3>
+<ProyectoForm @ref="proyectoForm" Proyecto="proyecto" OnSubmit="Create" ReturnAction="Return" />
+
+@code {
+    private Proyecto proyecto = new();
+    private ProyectoForm proyectoForm;
+
+    private async Task Create()
+    {
+        var responseHttp = await repository.PostAsync("/api/proyectos", proyecto);
+        if (responseHttp.Error)
+        {
+            var message = await responseHttp.GetErrorMessage();
+            await sweetAlertService.FireAsync("Error", message);
+            return;
+        }
+        navegationManager.NavigateTo("/proyectos");
+    }
+
+    private void Return()
+    {
+        navegationManager.NavigateTo("/proyectos");
+    }
+}

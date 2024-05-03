@@ -1,0 +1,115 @@
+﻿@using Construction.Shared.Entities
+@using Construction.WEB.Repositories
+@using Construction.WEB.Shared
+
+@inject IRepository repository
+@inject SweetAlertService sweetAlertService
+
+<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation"></NavigationLock>
+
+<EditForm Model="Proyecto" OnSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="mb-3">
+        <label>Nombre:</label>
+        <div>
+            <InputText width="10" @bind-Value="Proyecto.Nombre"></InputText>
+            <ValidationMessage For="@(() => Proyecto.Nombre)" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label>Ubicación:</label>
+        <div>
+            <InputText width="10" @bind-Value="Proyecto.Ubicacion"></InputText>
+            <ValidationMessage For="@(() => Proyecto.Ubicacion)" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label>Descripción:</label>
+        <div>
+            <InputText width="10" @bind-Value="Proyecto.Descripcion"></InputText>
+            <ValidationMessage For="@(() => Proyecto.Descripcion)" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha de Inicio:</label>
+        <div>
+            <InputDate @bind-Value="Proyecto.FechaInicio"></InputDate>
+            <ValidationMessage For="@(() => Proyecto.FechaInicio)" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha de finalización:</label>
+        <div>
+            <InputDate @bind-Value="Proyecto.FechaFin"></InputDate>
+            <ValidationMessage For="@(() => Proyecto.FechaFin)" />
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit"><i class="bi bi-floppy" />Guardar</button>
+    <button class="btn btn-info" type="reset"><i class="bi bi-x-circle" />Limpiar</button>
+    <button class="btn btn-success" @onclick="ReturnAction"><i class="bi bi-arrow-left" />Regresar</button>
+</EditForm>
+
+
+@code 
+{
+    private EditContext editContext = null!;
+    protected override void OnInitialized()
+    {
+        editContext = new(Proyecto);
+    }
+
+    [Parameter]
+    [EditorRequired]
+    public Proyecto Proyecto { get; set; } = null!;
+
+    [Parameter]
+    [EditorRequired]
+    public EventCallback OnSubmit { get; set; }
+
+
+    [EditorRequired]
+    [Parameter]
+    public EventCallback ReturnAction { get; set; }
+
+    public bool FormularioPosteadoConExito { get; set; } = false;
+
+
+
+    private async Task OnBeforeInternalNavigation(LocationChangingContext context)
+    {
+        var formularioFueEditado = editContext.IsModified();
+
+        if (!formularioFueEditado)
+        {
+            return;
+        }
+
+        if (FormularioPosteadoConExito)
+        {
+            return;
+        }
+
+        var resultado = await sweetAlertService.FireAsync(new SweetAlertOptions
+            {
+                Title = "Confirmación",
+                Text = "¿Deseas abandonar la página y perder los cambios?",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true
+            });
+
+        var confirmado = !string.IsNullOrEmpty(resultado.Value);
+
+        if (confirmado)
+        {
+            return;
+        }
+
+        context.PreventNavigation();
+    }
+}
