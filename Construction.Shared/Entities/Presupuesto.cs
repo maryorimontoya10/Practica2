@@ -14,16 +14,19 @@ namespace Construction.Shared.Entities
         public int Id { get; set; }
 
         [Display(Name = "Presupuesto mano de obra")]
+        [DisplayFormat(DataFormatString ="{0:N2}")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public double PresupuestoManoObra { get; set; }
+        public decimal PresupuestoManoObra { get; set; }
 
         [Display(Name = "Presupuesto maquinaria")]
+        [DisplayFormat(DataFormatString = "{0:N2}")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public double PresupuestoMaquinaria { get; set; }
+        public decimal PresupuestoMaquinaria { get; set; }
 
         [Display(Name = "Presupuesto materiales")]
+        [DisplayFormat(DataFormatString = "{0:N2}")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public double PresupuestoMateriales { get; set; }
+        public decimal PresupuestoMateriales { get; set; }
 
         //Relaciones
         

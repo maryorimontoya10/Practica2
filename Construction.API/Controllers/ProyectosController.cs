@@ -32,7 +32,7 @@ namespace Construction.API.Controllers
         }
 
         //Método Get- por Id
-        [HttpGet("id: int")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult> Get(int id)
         {
             var proyecto = await
@@ -55,7 +55,7 @@ namespace Construction.API.Controllers
         }
 
         //Método de borrar
-        [HttpDelete("id: int")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
 

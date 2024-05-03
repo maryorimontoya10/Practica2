@@ -33,7 +33,7 @@
                 <tr>
                     <td>
                                 <a href="/proyectos/edit/@item.Id" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square" /> Editar</a>
-                                <button @onclick=@(() => DeleteAsycn(item)) class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"/> Borrar</button>
+                                    <button @onclick=@(() => DeleteAsycn(item)) class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"/> Borrar</button>
                     </td>
                     <td>
                         @item.Nombre
@@ -62,7 +62,7 @@
 </div>
 
 @code {
-    public List<Proyecto>? Proyectos { get; set; }
+    public List<Proyecto> Proyectos { get; set; }
 
 
     protected override async Task OnInitializedAsync()
@@ -86,6 +86,7 @@
 
         private async Task DeleteAsycn(Proyecto proyecto)
     {
+
         var result = await sweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
@@ -99,12 +100,12 @@
             return;
         }
 
-        var responseHttp = await repository.DeleteAsync<Proyecto>($"api/proyectos/{proyecto.Id}");
+        var responseHttp = await repository.DeleteAsync<Proyecto>($"/api/proyectos/{proyecto.Id}");
         if (responseHttp.Error)
         {
             if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                   navigationManager.NavigateTo("proyectos");
+                   navigationManager.NavigateTo("/proyectos");
                 }
                 else
                 {
@@ -124,6 +125,6 @@
             });
             await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro borrado con éxito.");
         }
-    
+   
 }
 
