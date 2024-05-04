@@ -5,7 +5,7 @@ namespace Construction.API.Helpers
 {
     public interface IUserHelper
     {
-        Task<User> GetUserAsync(string nombre);
+        Task<User> GetUserAsync(string email);
         Task<IdentityResult> AdduserAsync(User user, string password);
 
         Task CheckRoleAsync(string roleName);

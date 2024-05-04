@@ -16,7 +16,7 @@ namespace Construction.API.Controllers
         {
             _context = context;
         }
-        [HttpGet()]
+        [HttpGet]
         public async Task<ActionResult> Get()
         {
             return Ok(await _context.Materiales.ToListAsync());
@@ -31,7 +31,7 @@ namespace Construction.API.Controllers
         }
 
         //Método Get- por Id
-        [HttpGet("id: int")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult> Get(int id)
         {
             var material = await
@@ -54,7 +54,7 @@ namespace Construction.API.Controllers
         }
 
         //Método de borrar
-        [HttpDelete("id: int")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
 

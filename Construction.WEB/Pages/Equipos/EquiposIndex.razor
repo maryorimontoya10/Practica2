@@ -1,8 +1,7 @@
-﻿@page "/proyectos"
+﻿@page "/equipos"
 @using Construction.Shared.Entities
 @using Construction.WEB.Repositories
 @using Construction.WEB.Shared
-
 @inject IRepository repository
 @inject SweetAlertService sweetAlertService
 @inject NavigationManager navigationManager
@@ -10,52 +9,45 @@
 <div class="card">
     <div class="card-header">
         <span>
-            <i class="bi bi-person" /> Proyectos
-            <a class="btn btn-primary btn-sm float-end" href="/proyectos/create"><i class="bi bi-plus-circle"/>New Proyecto</a>
+            <i class="bi bi-person" /> Equipos
+            <a class="btn btn-primary btn-sm float-end" href="/equipos/create"><i class="bi bi-plus-circle" />New Equipo</a>
 
         </span>
-</div>
+    </div>
 
     <div class="card-body">
 
-<GenericList MyList="Proyectos">
+        <GenericList MyList="Equipos">
 
-    <Body>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Proyectos!)
-            {
-                <tr>
-                    <td>
-                                <a href="/proyectos/edit/@item.Id" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square" /> Editar</a>
-                                    <button @onclick=@(() => DeleteAsycn(item)) class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"/> Borrar</button>
-                    </td>
-                    <td>
-                        @item.Nombre
-                    </td>
-                    <td>
-                        @item.Ubicacion
-                    </td>
+            <Body>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Equipos!)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="/equipos/edit/@item.Id" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square" /> Editar</a>
+                                    <button @onclick=@(() => DeleteAsycn(item)) class="btn btn-sm btn-danger"><i class="bi bi-trash-fill" /> Borrar</button>
+                                </td>
+                                <td>
+                                    @item.Nombre
+                                </td>
+                                <td>
+                                    @item.Especialidad
+                                </td>
 
-                        <td>
-                        @item.Descripcion
-                    </td>
-                    <td>
-                        @item.FechaInicio
-                        </td>
-                    <td>
-                        @item.FechaFin
-                        </td>
-
-                </tr>
-            }
-        </tbody>
-    </table>
+                                <td>
+                                    @item.ListaMiembros
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </Body>
         </GenericList>
     </div>
@@ -63,7 +55,7 @@
 <script src="_content/CurrieTechnologies.Razor.SweetAlert2/sweetAlert2.min.js" defer></script>
 
 @code {
-    public List<Proyecto> Proyectos { get; set; }
+    public List<Equipo> Equipos { get; set; }
 
 
     protected override async Task OnInitializedAsync()
@@ -73,22 +65,23 @@
 
     private async Task LoadAsync()
     {
-        var responseHttp = await repository.GetAsync<List<Proyecto>>("api/proyectos");
+        var responseHttp = await repository.GetAsync<List<Equipo>>("api/equipos");
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
             await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
         }
-        Proyectos = responseHttp.Response!;
+        Equipos = responseHttp.Response!;
     }
 
-        private async Task DeleteAsycn(Proyecto proyecto)
+
+    private async Task DeleteAsycn(Equipo equipo)
     {
         var result = await sweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
-                Text = $"¿Estas seguro de querer borrar el proyecto: {proyecto.Nombre}?",
+                Text = $"¿Estas seguro de querer borrar el equipo: {equipo.Nombre}?",
                 Icon = SweetAlertIcon.Question,
                 ShowCancelButton = true,
             });
@@ -97,8 +90,7 @@
         {
             return;
         }
-        var responseHttp = await repository.DeleteAsync<Proyecto>($"/api/proyectos/{proyecto.Id}");
-        navigationManager.NavigateTo("/proyectos");
+        var responseHttp = await repository.DeleteAsync<Equipo>($"/api/equipos/{equipo.Id}");
         if (responseHttp.Error)
         {
             if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -123,6 +115,5 @@
             });
         await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro borrado con éxito.");
     }
-   
-}
 
+}

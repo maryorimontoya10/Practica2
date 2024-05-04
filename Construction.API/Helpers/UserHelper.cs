@@ -1,7 +1,8 @@
-﻿using Construction.API.Data;
-using Construction.Shared.Entities;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Headers;
+using Construction.API.Data;
+using Construction.Shared.Entities;
 
 namespace Construction.API.Helpers
 {

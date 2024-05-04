@@ -1,18 +1,18 @@
-﻿@page "/proyectos/create"
+﻿@page "/equipos/create"
 @inject IRepository repository
 @inject NavigationManager navegationManager
 @inject SweetAlertService sweetAlertService
 
-<h3>ProyectoCreate</h3>
-<ProyectoForm @ref="proyectoForm" Proyecto="proyecto" OnSubmit="Create" ReturnAction="Return" />
+<h3>EquipoCreate</h3>
+<EquipoForm @ref="equipoForm" Equipo="equipo" OnSubmit="Create" ReturnAction="Return" />
 
 @code {
-    private Proyecto proyecto = new();
-    private ProyectoForm proyectoForm;
+    private Equipo equipo = new();
+    private EquipoForm equipoForm;
 
     private async Task Create()
     {
-        var responseHttp = await repository.PostAsync("/api/proyectos", proyecto);
+        var responseHttp = await repository.PostAsync("/api/equipos", equipo);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -27,6 +27,7 @@
                 Position = SweetAlertPosition.BottomEnd,
                 ShowConfirmButton = true,
                 Timer = 3000
+
             });
 
         await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro creado con éxito");
@@ -34,6 +35,6 @@
 
     private void Return()
     {
-        navegationManager.NavigateTo("/proyectos");
+        navegationManager.NavigateTo("/equipos");
     }
 }

@@ -17,7 +17,7 @@ namespace Construction.WEB.Repositories
 
         public HttpResponseMessage HttpResponseMessage { get; set; }
 
-        public async Task<string> GetErrorMessage()
+        public async Task<string> GetErrorMessageAsync()
         {
             if (!Error)
             {
@@ -29,15 +29,15 @@ namespace Construction.WEB.Repositories
             {
                 return "Recurso no encontrado";
             }
-            else if (codigoEstatus == HttpStatusCode.BadRequest)
+            if (codigoEstatus == HttpStatusCode.BadRequest)
             {
                 return await HttpResponseMessage.Content.ReadAsStringAsync();
             }
-            else if (codigoEstatus == HttpStatusCode.Unauthorized)
+            if (codigoEstatus == HttpStatusCode.Unauthorized)
             {
                 return " Debes loguearte para realizar esta acción";
             }
-            else if (codigoEstatus == HttpStatusCode.Forbidden)
+            if (codigoEstatus == HttpStatusCode.Forbidden)
             {
                 return " No tienes permisos para ejecutar esta acción";
             }

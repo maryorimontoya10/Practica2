@@ -17,7 +17,7 @@ namespace Construction.API.Controllers
             _context = context;
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<ActionResult> Get()
         {
             return Ok(await _context.Proyectos.ToListAsync());

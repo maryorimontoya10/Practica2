@@ -1,6 +1,7 @@
 ﻿
-using System.Text;
 using System.Text.Json;
+using System.Text;
+using System.Net.Http;
 
 namespace Construction.WEB.Repositories
 {
@@ -81,16 +82,6 @@ namespace Construction.WEB.Repositories
         {
             var response = await responseHttp.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(response, _jsonDefaultOptions)!;
-        }
-
-        public Task<HttpResponseWrapper<object>> Post<T>(string url, T model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<HttpResponseWrapper<TResponse>> Post<T, TResponse>(string url, T model)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/proyectos/edit/{Id:int}"
+﻿@page "/equipos/edit/{Id:int}"
 @using System.Net
 @inject IRepository repository
 @inject NavigationManager navegationManager
@@ -6,30 +6,30 @@
 
 <h3>Editar</h3>
 
-@if (proyecto is null)
+@if (equipo is null)
 {
     <p>Cargando...</p>
 }
 else
 {
-    <ProyectoForm @ref="proyectoForm"  Proyecto="proyecto" OnSubmit="Editar" ReturnAction="Return"/>
+    <EquipoForm @ref="equipoForm" Equipo="equipo" OnSubmit="Editar" ReturnAction="Return" />
 }
 
 @code {
     [Parameter]
     public int Id { get; set; }
-    private Proyecto proyecto;
+    private Equipo equipo;
 
-    private ProyectoForm proyectoForm;
+    private EquipoForm equipoForm;
 
     protected override async Task OnParametersSetAsync()
     {
-        var responseHttp = await repository.GetAsync<Proyecto>($"/api/proyectos/{Id}");
+        var responseHttp = await repository.GetAsync<Equipo>($"/api/equipos/{Id}");
         if (responseHttp.Error)
         {
             if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
             {
-                navegationManager.NavigateTo("/proyectos");
+                navegationManager.NavigateTo("/equipos");
             }
             else
             {
@@ -39,13 +39,13 @@ else
         }
         else
         {
-            proyecto = responseHttp.Response;
+            equipo = responseHttp.Response;
         }
     }
 
     private async Task Editar()
     {
-        var responseHttp = await repository.PutAsync("/api/proyectos", proyecto);
+        var responseHttp = await repository.PutAsync("/api/equipos", equipo);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -66,8 +66,7 @@ else
 
     private void Return()
     {
-        navegationManager.NavigateTo("/proyectos");
+        navegationManager.NavigateTo("/equipos");
     }
 
 }
-
