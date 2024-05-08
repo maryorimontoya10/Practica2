@@ -1,8 +1,8 @@
-﻿
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Construction.API.Data;
 using Construction.Shared.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace Construction.API.Controllers
 {

@@ -28,7 +28,7 @@ namespace Construction.API.Data
             await _context.Database.EnsureCreatedAsync();
             await CheckProyectosAsync();
             await CheckRolesAsync();
-            await CheckUserAsync("1010", "OAP", "Admin", "orlapez@gmail.com", "305232456", "Cr 45 7896", UserType.Admin);
+            await CheckUserAsync("1010", "OAP", "Admin", "abcde@gmail.com", "305232456", "Cr 45 7896", UserType.Admin);
 
 
 
@@ -69,15 +69,19 @@ namespace Construction.API.Data
         }
         private async Task CheckProyectosAsync()
         {
-            if(!_context.Proyectos.Any())
+            if (!_context.Proyectos.Any())
             {
                 _context.Proyectos.Add(new Proyecto { Nombre = "Hospital" });
                 _context.Proyectos.Add(new Proyecto { Nombre = "Colegio" });
                 _context.Proyectos.Add(new Proyecto { Nombre = "Apartamento" });
                 _context.Proyectos.Add(new Proyecto { Nombre = "Centro Comercial" });
                 _context.Proyectos.Add(new Proyecto { Nombre = "Casa" });
+
             }
+
+
             await _context.SaveChangesAsync();
         }
-        }
     }
+}
+   

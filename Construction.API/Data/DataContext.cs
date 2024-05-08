@@ -7,8 +7,9 @@ namespace Construction.API.Data
 {
     public class DataContext:IdentityDbContext<User>
     {
-        public DataContext(DbContextOptions<DataContext> options):base(options) { 
-        
+        public DataContext(DbContextOptions<DataContext> options):base(options) {
+
+            Database.EnsureCreated();
         }
 
         public DbSet<Equipo>Equipos { get; set; }
@@ -23,6 +24,17 @@ namespace Construction.API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Presupuesto>()
+              .Property(p => p.PresupuestoManoObra)
+              .HasColumnType("decimal(18, 2)");
+
+            modelBuilder.Entity<Presupuesto>()
+                .Property(p => p.PresupuestoMaquinaria)
+                .HasColumnType("decimal(18, 2)");
+
+            modelBuilder.Entity<Presupuesto>()
+              .Property(p => p.PresupuestoMateriales)
+              .HasColumnType("decimal(18, 2)");
         }
 
 
